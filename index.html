@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="College Exam Hall Management System - Operating System Concepts Interactive Simulator demonstrating CO1 to CO5 in Pure HTML5, CSS3, and Vanilla JavaScript" />
+  <title>College Exam Hall OS Simulator | Operating System 315319</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Shared Pure CSS3 Design System -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <path d="M7 7h10"/>
+            <path d="M7 12h10"/>
+            <path d="M7 17h10"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h2>ExamOS Sim</h2>
+          <p>OS Concept Lab</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Overview</div>
+        <a href="#dashboard" class="nav-link active" data-view="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+          <span class="nav-co-tag">CO1</span>
+        </a>
+
+        <div class="nav-category">Process & Threads (CO2)</div>
+        <a href="#processes" class="nav-link" data-view="processes">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
+          <span>Student Processes</span>
+          <span class="nav-co-tag">CO2</span>
+        </a>
+        <a href="#threads" class="nav-link" data-view="threads">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+          <span>Invigilator Threads</span>
+          <span class="nav-co-tag">CO2</span>
+        </a>
+
+        <div class="nav-category">Scheduling & Deadlock (CO3)</div>
+        <a href="#halls" class="nav-link" data-view="halls">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Hall Allocation (FCFS)</span>
+          <span class="nav-co-tag">CO3</span>
+        </a>
+        <a href="#scheduling" class="nav-link" data-view="scheduling">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Priority Scheduling</span>
+          <span class="nav-co-tag">CO3</span>
+        </a>
+        <a href="#deadlock" class="nav-link" data-view="deadlock">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Deadlock Detection</span>
+          <span class="nav-co-tag">CO3</span>
+        </a>
+
+        <div class="nav-category">Memory & Storage (CO4/CO5)</div>
+        <a href="#memory" class="nav-link" data-view="memory">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 19v-3"/><path d="M10 19v-3"/><path d="M14 19v-3"/><path d="M18 19v-3"/><rect width="20" height="12" x="2" y="4" rx="2"/></svg>
+          <span>Memory & LRU Paging</span>
+          <span class="nav-co-tag">CO4</span>
+        </a>
+        <a href="#file-manager" class="nav-link" data-view="file-manager">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>File Allocation (Blocks)</span>
+          <span class="nav-co-tag">CO5</span>
+        </a>
+        <a href="#directory" class="nav-link" data-view="directory">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>Department Directory</span>
+          <span class="nav-co-tag">CO5</span>
+        </a>
+
+        <div class="nav-category">Summary & Viva</div>
+        <a href="#reports" class="nav-link" data-view="reports">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>Exam Summary Report</span>
+          <span class="nav-co-tag">ALL</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="kernel-status-card">
+          <div class="status-dot-pulse"></div>
+          <div class="kernel-info">
+            <h4>Simulated Kernel Active</h4>
+            <p>POSIX / MSBTE 315319</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          <button class="menu-toggle-btn" id="menu-toggle-btn" title="Toggle Navigation Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          </button>
+          <div class="breadcrumb-trail">
+            <span>ExamOS Simulator</span>
+            <span>/</span>
+            <span class="breadcrumb-active" id="navbar-breadcrumb-current">Dashboard</span>
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <div class="system-ticker" title="Simulated Kernel Uptime">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="ticker-item">UPTIME: <strong id="nav-uptime-counter">2h 45m 10s</strong></span>
+          </div>
+
+          <button class="btn btn-outline btn-sm font-mono" onclick="if(confirm('Reset all demonstration data to default settings?')) ExamOS.resetToDefault()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            RESET DEMO DATA
+          </button>
+        </div>
+      </header>
+
+      <!-- Viewport / Multi-View Container -->
+      <main class="page-viewport">
+        <!-- ==========================================
+             VIEW 1: DASHBOARD (CO1 System Information)
+             ========================================== -->
+        <section id="view-dashboard" class="view-section active">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-emerald">COURSE OUTCOME 1</span>
+                <span class="badge badge-cyan">BATCH PROCESSING</span>
+              </div>
+              <h1 class="page-title">Operating System Information Dashboard</h1>
+              <p class="page-subtitle">Demonstrates host kernel parameters and classifies college exam management as a batch processing scenario.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="ExamOS.navigateTo('processes')">
+                MANAGE PROCESSES ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Top Metric Counters -->
+          <div class="grid-4">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Student Processes</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                </div>
+              </div>
+              <div class="stat-value" id="dash-count-students">8</div>
+              <div class="stat-footer">
+                <span class="badge badge-running">CO2 Process Pool</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Exam Halls (H)</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+              </div>
+              <div class="stat-value" id="dash-count-halls">4</div>
+              <div class="stat-footer">
+                <span class="badge badge-cyan">CO3 FCFS Resource</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Invigilator Threads</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </div>
+              </div>
+              <div class="stat-value" id="dash-count-invigilators">6</div>
+              <div class="stat-footer">
+                <span class="badge badge-amber">CO2/CO3 Priority</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Memory Frames</span>
+                <div class="stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="12" x="2" y="4" rx="2"/></svg>
+                </div>
+              </div>
+              <div class="stat-value" id="dash-count-frames">4/4</div>
+              <div class="stat-footer">
+                <span class="badge badge-purple">CO4 LRU Replacement</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CO1 System Info & Batch Processing Classification -->
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  Simulated Operating System Information
+                </h3>
+                <span class="badge badge-emerald">CO1 VERIFIED</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.84rem; display: grid; grid-template-columns: 160px 1fr; gap: 0.65rem; color: var(--text-secondary);">
+                <span>OS Type:</span> <strong style="color:#fff;" id="dash-os-type">Linux 6.8.0-45-generic</strong>
+                <span>Hostname:</span> <strong style="color:var(--accent-cyan);" id="dash-hostname">Exam-Hall-Cluster-Node01</strong>
+                <span>Kernel Version:</span> <strong id="dash-kernel">6.8.0-POSIX-Sim</strong>
+                <span>Architecture:</span> <strong id="dash-arch">x86_64 / Multicore</strong>
+                <span>Academic Subject:</span> <strong style="color:#fff;">Operating System (315319)</strong>
+                <span>Target Class:</span> <strong>Diploma Computer Engineering (CO5K)</strong>
+              </div>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Classification: Batch Processing OS Scenario
+                </h3>
+                <span class="badge badge-amber">FR-02 COMPLIANT</span>
+              </div>
+              <div style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.65;">
+                <p style="margin-bottom: 0.75rem;">
+                  <strong>Classification:</strong> <span id="dash-classification" style="color:var(--accent-cyan); font-family:var(--font-mono); font-weight:700;">BATCH PROCESSING SYSTEM</span>
+                </p>
+                <p id="dash-classification-reason" style="background: rgba(15, 23, 42, 0.7); padding: 0.85rem; border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.82rem;">
+                  Examinations involve bulk processing of student candidates, predefined timetable slots, batch-wise hall allocations, and sequential distribution of exam papers without interactive per-student scheduling.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Audit Log -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Real-Time Kernel & Simulation Event Log
+              </h3>
+              <span class="badge badge-cyan font-mono">AUDIT TRAIL</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Module</th>
+                    <th>Event Details</th>
+                    <th>Kernel Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-audit-logs-body">
+                  <!-- Populated by dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 2: STUDENT PROCESSES (CO2)
+             ========================================== -->
+        <section id="view-processes" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-sky">COURSE OUTCOME 2</span>
+                <span class="badge badge-cyan">PROCESS SUBSYSTEM</span>
+              </div>
+              <h1 class="page-title">Student Process Management</h1>
+              <p class="page-subtitle">Each student exam session is modeled as an OS process with unique PID, state transitions, and Process Control Block (PCB).</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="ExamOS.openModal('modal-add-student')">
+                + SPAWN STUDENT PROCESS
+              </button>
+            </div>
+          </div>
+
+          <!-- Process Lifecycle Visualizer -->
+          <div class="state-flow-container">
+            <div class="state-node node-ready">
+              <span class="badge badge-ready">READY</span>
+              <div style="font-size: 1.5rem; font-weight:700; font-family:var(--font-mono); margin-top:0.25rem;" id="state-count-ready">3</div>
+              <div style="font-size: 0.72rem; color:var(--text-muted);">In Queue</div>
+            </div>
+            <div class="state-arrow">➔</div>
+            <div class="state-node node-running">
+              <span class="badge badge-running">RUNNING</span>
+              <div style="font-size: 1.5rem; font-weight:700; font-family:var(--font-mono); margin-top:0.25rem;" id="state-count-running">2</div>
+              <div style="font-size: 0.72rem; color:var(--text-muted);">Writing Exam</div>
+            </div>
+            <div class="state-arrow">⇄</div>
+            <div class="state-node node-waiting">
+              <span class="badge badge-waiting">WAITING</span>
+              <div style="font-size: 1.5rem; font-weight:700; font-family:var(--font-mono); margin-top:0.25rem;" id="state-count-waiting">2</div>
+              <div style="font-size: 0.72rem; color:var(--text-muted);">I/O / Hash Check</div>
+            </div>
+            <div class="state-arrow">➔</div>
+            <div class="state-node node-completed">
+              <span class="badge badge-completed">COMPLETED</span>
+              <div style="font-size: 1.5rem; font-weight:700; font-family:var(--font-mono); margin-top:0.25rem;" id="state-count-completed">1</div>
+              <div style="font-size: 0.72rem; color:var(--text-muted);">Turned In</div>
+            </div>
+          </div>
+
+          <!-- Toolbar Search & Filters -->
+          <div class="toolbar">
+            <div class="search-box">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" class="form-input" placeholder="Search by PID, Name, or ID..." oninput="ProcessManagerModule.currentSearchTerm = this.value; ProcessManagerModule.renderStudents();" />
+            </div>
+
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-outline btn-sm" onclick="ProcessManagerModule.currentStudentFilter='ALL'; ProcessManagerModule.renderStudents();">ALL</button>
+              <button class="btn btn-outline btn-sm text-amber" onclick="ProcessManagerModule.currentStudentFilter='READY'; ProcessManagerModule.renderStudents();">READY</button>
+              <button class="btn btn-outline btn-sm text-emerald" onclick="ProcessManagerModule.currentStudentFilter='RUNNING'; ProcessManagerModule.renderStudents();">RUNNING</button>
+              <button class="btn btn-outline btn-sm text-purple" onclick="ProcessManagerModule.currentStudentFilter='WAITING'; ProcessManagerModule.renderStudents();">WAITING</button>
+              <button class="btn btn-outline btn-sm" onclick="ProcessManagerModule.currentStudentFilter='COMPLETED'; ProcessManagerModule.renderStudents();">COMPLETED</button>
+            </div>
+          </div>
+
+          <!-- Students Process Table -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>PID</th>
+                    <th>Student ID</th>
+                    <th>Candidate Name</th>
+                    <th>Department</th>
+                    <th>Hall</th>
+                    <th>Seat</th>
+                    <th>State</th>
+                    <th>State Action</th>
+                  </tr>
+                </thead>
+                <tbody id="students-table-body">
+                  <!-- Populated by process-manager.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 3: INVIGILATOR THREADS (CO2)
+             ========================================== -->
+        <section id="view-threads" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-sky">COURSE OUTCOME 2</span>
+                <span class="badge badge-emerald">MULTITHREADING</span>
+              </div>
+              <h1 class="page-title">Invigilator Multithreading Model</h1>
+              <p class="page-subtitle">Each invigilator runs as a lightweight thread within the main exam process, assigned to specific halls and proctoring duties.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="ExamOS.openModal('modal-add-thread')">
+                + SPAWN INVIGILATOR THREAD
+              </button>
+            </div>
+          </div>
+
+          <!-- Multithreading Diagram -->
+          <div class="card" style="margin-bottom: 1.5rem; text-align:center;">
+            <div class="card-header">
+              <h3 class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Multithreading Architecture: Main Process ➔ Thread Pool
+              </h3>
+              <span class="badge badge-emerald">CO2 THREAD MODEL</span>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; color: var(--text-secondary); background: rgba(15, 23, 42, 0.6); padding: 1.25rem; border-radius: 8px;">
+              [Exam Management Master Process (PID: P001)]<br>
+              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;│<br>
+              ┌───────────────┬─────────────────┼────────────────┬──────────────┐<br>
+              ▼&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▼&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▼&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▼&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▼<br>
+              <strong style="color:var(--accent-cyan);">T01 (Sharma)</strong>&emsp;&emsp;<strong style="color:var(--accent-cyan);">T02 (Patil)</strong>&emsp;&emsp;&emsp;<strong style="color:var(--accent-cyan);">T03 (Kulkarni)</strong>&emsp;&emsp;<strong style="color:var(--accent-cyan);">T04 (Joshi)</strong>&emsp;&emsp;<strong style="color:var(--text-muted);">T05 (Standby)</strong><br>
+              [Hall H-01]&emsp;&emsp;&emsp;[Hall H-02]&emsp;&emsp;&emsp;[Hall H-03]&emsp;&emsp;&emsp;&emsp;[Hall H-04]&emsp;&emsp;&emsp;[Reserve Pool]
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Thread ID</th>
+                    <th>Proctor ID</th>
+                    <th>Invigilator Name</th>
+                    <th>Priority</th>
+                    <th>Assigned Hall</th>
+                    <th>Status</th>
+                    <th>Role / Responsibility</th>
+                    <th>Control</th>
+                  </tr>
+                </thead>
+                <tbody id="threads-table-body">
+                  <!-- Populated by process-manager.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 4: HALL ALLOCATION (FCFS - CO3)
+             ========================================== -->
+        <section id="view-halls" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-amber">COURSE OUTCOME 3</span>
+                <span class="badge badge-cyan">FCFS ALLOCATION</span>
+              </div>
+              <h1 class="page-title">Hall Allocation using FCFS Algorithm</h1>
+              <p class="page-subtitle">Examination halls are allocated to incoming student batches according to their First-Come, First-Served arrival order.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-outline" onclick="ExamOS.openModal('modal-enqueue-batch')">
+                + ENQUEUE BATCH
+              </button>
+              <button class="btn btn-primary" onclick="SchedulingModule.runFCFSAllocation()">
+                EXECUTE FCFS ALLOCATION ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Hall Capacity Cards -->
+          <div class="grid-4" id="halls-card-container">
+            <!-- Populated by scheduling.js -->
+          </div>
+
+          <!-- FCFS Queue Table -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title font-mono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                Incoming Batch Arrival Queue (FIFO)
+              </h3>
+              <span class="badge badge-amber font-mono">FCFS SCHEDULE</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Arrival Order</th>
+                    <th>Batch ID</th>
+                    <th>Department</th>
+                    <th>Candidate Count</th>
+                    <th>Arrival Time</th>
+                    <th>Allocated Hall</th>
+                    <th>Allocation Status</th>
+                  </tr>
+                </thead>
+                <tbody id="fcfs-queue-tbody">
+                  <!-- Populated by scheduling.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 5: PRIORITY SCHEDULING (CO3)
+             ========================================== -->
+        <section id="view-scheduling" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-amber">COURSE OUTCOME 3</span>
+                <span class="badge badge-emerald">PRIORITY SCHEDULING</span>
+              </div>
+              <h1 class="page-title">Invigilator Priority Scheduling</h1>
+              <p class="page-subtitle">Invigilator duties are dispatched based on priority values (Priority 1 = Highest preference for critical hall proctoring).</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="SchedulingModule.runPriorityRebalance()">
+                EVALUATE & DISPATCH HIGHEST PRIORITY ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Priority Timeline -->
+          <div class="card" style="margin-bottom:1.5rem;">
+            <div class="card-header">
+              <h3 class="card-title font-mono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Priority Dispatch Execution Order
+              </h3>
+              <span class="badge badge-emerald font-mono">PREEMPTIVE/PRIORITY</span>
+            </div>
+            <div id="scheduling-timeline">
+              <!-- Populated by scheduling.js -->
+            </div>
+          </div>
+
+          <!-- Priority Staff Table -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Dispatch Rank</th>
+                    <th>Thread ID</th>
+                    <th>Staff Name</th>
+                    <th>Priority Level</th>
+                    <th>Assigned Hall</th>
+                    <th>Status</th>
+                    <th>Department</th>
+                  </tr>
+                </thead>
+                <tbody id="priority-scheduling-tbody">
+                  <!-- Populated by scheduling.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 6: DEADLOCK DETECTION (CO3)
+             ========================================== -->
+        <section id="view-deadlock" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-amber">COURSE OUTCOME 3</span>
+                <span class="badge badge-rose">DEADLOCK MONITOR</span>
+              </div>
+              <h1 class="page-title">Hall-Resource Deadlock Detection</h1>
+              <p class="page-subtitle">Simulates Resource Allocation Graphs (RAG) and circular wait dependencies between halls, proctors, and student batches.</p>
+            </div>
+          </div>
+
+          <!-- Live Status Banner -->
+          <div id="deadlock-status-card" style="margin-bottom:1.5rem;">
+            <!-- Populated by deadlock.js -->
+          </div>
+
+          <!-- Visual RAG Diagram -->
+          <div id="rag-diagram-container" style="margin-bottom:1.5rem;">
+            <!-- Populated by deadlock.js -->
+          </div>
+
+          <!-- Coffman Conditions Explanation Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title font-mono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Operating System Coffman Conditions for Deadlock
+              </h3>
+              <span class="badge badge-cyan font-mono">THEORY & VIVA</span>
+            </div>
+            <div style="font-size:0.85rem; color:var(--text-secondary); display:grid; grid-template-columns: repeat(2, 1fr); gap:1rem; line-height:1.6;">
+              <div style="background:rgba(15, 23, 42, 0.6); padding:0.85rem; border-radius:6px; border:1px solid var(--border-color);">
+                <strong style="color:#fff;">1. Mutual Exclusion:</strong> An examination hall or invigilator cannot be shared simultaneously by two independent batches.
+              </div>
+              <div style="background:rgba(15, 23, 42, 0.6); padding:0.85rem; border-radius:6px; border:1px solid var(--border-color);">
+                <strong style="color:#fff;">2. Hold and Wait:</strong> Batch B1 holds Hall H-01 while waiting for Invigilator I-02 to arrive.
+              </div>
+              <div style="background:rgba(15, 23, 42, 0.6); padding:0.85rem; border-radius:6px; border:1px solid var(--border-color);">
+                <strong style="color:#fff;">3. No Preemption:</strong> Resources (hall key, paper vault token) cannot be forcibly confiscated until the batch concludes.
+              </div>
+              <div style="background:rgba(15, 23, 42, 0.6); padding:0.85rem; border-radius:6px; border:1px solid var(--border-color);">
+                <strong style="color:#fff;">4. Circular Wait:</strong> H-01 waits for I-02 ➔ I-02 waits for H-02 ➔ H-02 waits for I-01 ➔ I-01 waits for H-01.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 7: MEMORY MANAGEMENT & LRU (CO4)
+             ========================================== -->
+        <section id="view-memory" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-purple">COURSE OUTCOME 4</span>
+                <span class="badge badge-cyan">VIRTUAL MEMORY</span>
+              </div>
+              <h1 class="page-title">Seating Plan Memory Paging & LRU Replacement</h1>
+              <p class="page-subtitle">Examination hall seating arrangements are divided into memory pages. When 4 frames are full, Least Recently Used (LRU) evicts the oldest page.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-outline btn-sm font-mono" onclick="MemoryModule.resetCounters()">
+                RESET HIT/FAULT COUNTERS
+              </button>
+            </div>
+          </div>
+
+          <!-- Physical Frames Slots (4 Frames) -->
+          <div class="frame-slots-container" id="memory-frames-grid">
+            <!-- Populated by memory.js -->
+          </div>
+
+          <!-- Hit / Fault Statistics Row -->
+          <div class="grid-3">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Page Hits</span>
+                <span class="badge badge-safe">HIT</span>
+              </div>
+              <div class="stat-value text-emerald" style="color:var(--accent-emerald);" id="mem-hits-count">14</div>
+              <div class="stat-footer">Page already present in memory frame</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Page Faults</span>
+                <span class="badge badge-rose">FAULT</span>
+              </div>
+              <div class="stat-value text-rose" style="color:var(--accent-rose);" id="mem-faults-count">7</div>
+              <div class="stat-footer">Page loaded from secondary storage (LRU)</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Effective Hit Ratio</span>
+                <span class="badge badge-cyan">EFFICIENCY</span>
+              </div>
+              <div class="stat-value text-cyan" style="color:var(--accent-cyan);" id="mem-hit-ratio">67%</div>
+              <div class="stat-footer">Hits / (Hits + Faults)</div>
+            </div>
+          </div>
+
+          <!-- Reference Sequence Simulator Form -->
+          <div class="card" style="margin-bottom:1.5rem;">
+            <div class="card-header">
+              <h3 class="card-title font-mono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                LRU Reference String Tester
+              </h3>
+              <div id="mem-reference-stream" style="display:flex; gap:0.35rem; flex-wrap:wrap;"></div>
+            </div>
+            <form onsubmit="MemoryModule.handleSimulateSequence(event)" style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+              <input type="text" class="form-input" id="lru-sequence-input" placeholder="e.g. 1, 2, 3, 2, 5, 1, 3, 4, 2, 1" style="max-width:340px;" value="1, 2, 3, 2, 5, 1, 3, 4, 2, 1" />
+              <button type="submit" class="btn btn-primary font-mono">
+                SIMULATE SEQUENCE
+              </button>
+            </form>
+          </div>
+
+          <!-- Seating Paging Table -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title font-mono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+                Seating Plan Page Table (20 Seats / Page)
+              </h3>
+              <span class="badge badge-cyan font-mono">PAGE TABLE</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Page #</th>
+                    <th>Hall ID</th>
+                    <th>Candidate Seat Range</th>
+                    <th>Page Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="seating-pages-tbody">
+                  <!-- Populated by memory.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 8: FILE MANAGEMENT (CONTIGUOUS - CO5)
+             ========================================== -->
+        <section id="view-file-manager" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-indigo">COURSE OUTCOME 5</span>
+                <span class="badge badge-cyan">FILE ALLOCATION</span>
+              </div>
+              <h1 class="page-title">Contiguous File Allocation Simulator</h1>
+              <p class="page-subtitle">Simulates contiguous disk block allocation for exam seating files. Each file occupies consecutive disk blocks starting from a base block address.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="ExamOS.openModal('modal-add-file')">
+                + ALLOCATE NEW EXAM FILE
+              </button>
+            </div>
+          </div>
+
+          <!-- Disk Metrics -->
+          <div class="grid-3">
+            <div class="stat-card">
+              <div class="stat-header"><span class="stat-label">Used Disk Space</span></div>
+              <div class="stat-value text-cyan" style="color:var(--accent-cyan);" id="disk-used-blocks">26 Blocks</div>
+              <div class="stat-footer">Allocated consecutively</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header"><span class="stat-label">Free Space</span></div>
+              <div class="stat-value text-emerald" style="color:var(--accent-emerald);" id="disk-free-blocks">38 Blocks</div>
+              <div class="stat-footer">Available for contiguous files</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header"><span class="stat-label">Disk Utilization</span></div>
+              <div class="stat-value text-amber" style="color:var(--accent-amber);" id="disk-usage-percent">41%</div>
+              <div class="stat-footer">Out of 64 Total Blocks</div>
+            </div>
+          </div>
+
+          <!-- 64-Block Visual Disk Grid -->
+          <div class="card" style="margin-bottom:1.5rem;">
+            <div class="card-header">
+              <h3 class="card-title font-mono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                64-Block Secondary Disk Layout (Blocks 00 to 63)
+              </h3>
+              <div style="display:flex; gap:0.5rem; font-size:0.72rem; font-family:var(--font-mono);">
+                <span class="badge badge-cyan">OS_Exam</span>
+                <span class="badge badge-purple">CN_Exam</span>
+                <span class="badge badge-running">Java_Exam</span>
+                <span class="badge badge-amber">DBMS_Exam</span>
+              </div>
+            </div>
+            <div class="disk-grid" id="disk-blocks-grid">
+              <!-- Populated by file-manager.js -->
+            </div>
+          </div>
+
+          <!-- Allocated Files Table -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>File Name</th>
+                    <th>Department</th>
+                    <th>Starting Block</th>
+                    <th>File Size</th>
+                    <th>Allocated Blocks</th>
+                    <th>Allocation Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="files-table-tbody">
+                  <!-- Populated by file-manager.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 9: DEPARTMENT DIRECTORY (CO5)
+             ========================================== -->
+        <section id="view-directory" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-indigo">COURSE OUTCOME 5</span>
+                <span class="badge badge-amber">TREE DIRECTORY</span>
+              </div>
+              <h1 class="page-title">Department-Wise Tree-Structured Directory</h1>
+              <p class="page-subtitle">Demonstrates hierarchical tree directory organization for Computer Engineering, IT, and Electronics departments.</p>
+            </div>
+          </div>
+
+          <div class="grid-2-1">
+            <!-- Interactive Tree Explorer -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title font-mono">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                  Hierarchical File System Tree
+                </h3>
+                <span class="badge badge-cyan font-mono">/College_Exam</span>
+              </div>
+              <div class="tree-container" id="directory-tree-view">
+                <!-- Populated by directory.js -->
+              </div>
+            </div>
+
+            <!-- Inode & File Inspector Pane -->
+            <div id="directory-file-details">
+              <!-- Populated by directory.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+             VIEW 10: SUMMARY REPORTS (CO1 to CO5)
+             ========================================== -->
+        <section id="view-reports" class="view-section">
+          <div class="page-header">
+            <div class="page-header-title">
+              <div class="header-badge-row">
+                <span class="badge badge-emerald">COURSE OUTCOMES 1 - 5</span>
+                <span class="badge badge-cyan">FINAL AUDIT</span>
+              </div>
+              <h1 class="page-title">Complete Examination Management Summary</h1>
+              <p class="page-subtitle">Comprehensive OS resource management report as defined in Section 30 of the project specification document.</p>
+            </div>
+          </div>
+
+          <div id="reports-summary-container">
+            <!-- Populated by dashboard.js renderReports() -->
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODALS
+       ========================================== -->
+
+  <!-- 1. Add Student Process Modal -->
+  <div class="modal-overlay" id="modal-add-student">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title font-mono">Spawn Student Process</h3>
+        <button class="modal-close-btn" onclick="ExamOS.closeModal('modal-add-student')">✕</button>
+      </div>
+      <form onsubmit="ProcessManagerModule.handleCreateStudent(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Student Name</label>
+            <input type="text" name="name" class="form-input" required placeholder="e.g. Prathamesh Kulkarni" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Student ID</label>
+            <input type="text" name="studentId" class="form-input" required placeholder="e.g. ST220" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department</label>
+            <select name="department" class="form-select">
+              <option value="Computer Engineering">Computer Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electronics Engineering">Electronics Engineering</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Examination Subject</label>
+            <input type="text" name="exam" class="form-input" required value="Operating System (315319)" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Assigned Hall</label>
+            <select name="hallId" class="form-select">
+              <option value="H-01">H-01 (Aryabhata Hall)</option>
+              <option value="H-02">H-02 (Ramanujan Hall)</option>
+              <option value="H-03">H-03 (Turing Hall)</option>
+              <option value="H-04">H-04 (Babbage Hall)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="ExamOS.closeModal('modal-add-student')">Cancel</button>
+          <button type="submit" class="btn btn-primary">SPAWN PROCESS</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Add Invigilator Thread Modal -->
+  <div class="modal-overlay" id="modal-add-thread">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title font-mono">Create Invigilator Thread</h3>
+        <button class="modal-close-btn" onclick="ExamOS.closeModal('modal-add-thread')">✕</button>
+      </div>
+      <form onsubmit="ProcessManagerModule.handleCreateThread(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Invigilator Staff Name</label>
+            <input type="text" name="name" class="form-input" required placeholder="e.g. Dr. Rajesh Shinde" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Scheduling Priority (1 = Highest)</label>
+            <select name="priority" class="form-select">
+              <option value="1">Priority 1 (Chief Proctor / Highest)</option>
+              <option value="2">Priority 2 (Standard Hall Proctor)</option>
+              <option value="3">Priority 3 (Assistant Proctor)</option>
+              <option value="4">Priority 4 (Reserve Buffer)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Assigned Exam Hall</label>
+            <select name="assignedHall" class="form-select">
+              <option value="H-01">H-01</option>
+              <option value="H-02">H-02</option>
+              <option value="H-03">H-03</option>
+              <option value="H-04">H-04</option>
+              <option value="Unassigned">Unassigned (Standby)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department</label>
+            <select name="department" class="form-select">
+              <option value="Computer Engineering">Computer Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electronics Engineering">Electronics Engineering</option>
+              <option value="Applied Sciences">Applied Sciences</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Thread Role Description</label>
+            <input type="text" name="role" class="form-input" placeholder="e.g. Hall Proctor, Barcode Logger" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="ExamOS.closeModal('modal-add-thread')">Cancel</button>
+          <button type="submit" class="btn btn-primary">CREATE THREAD</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Enqueue Batch Modal -->
+  <div class="modal-overlay" id="modal-enqueue-batch">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title font-mono">Enqueue Batch for FCFS Allocation</h3>
+        <button class="modal-close-btn" onclick="ExamOS.closeModal('modal-enqueue-batch')">✕</button>
+      </div>
+      <form onsubmit="SchedulingModule.handleEnqueueBatch(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Batch Identifier</label>
+            <input type="text" name="batchId" class="form-input" required placeholder="e.g. ME5K-A" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department</label>
+            <select name="department" class="form-select">
+              <option value="Computer Engineering">Computer Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electronics Engineering">Electronics Engineering</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Candidate Count</label>
+            <input type="number" name="studentCount" class="form-input" min="1" max="80" value="45" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="ExamOS.closeModal('modal-enqueue-batch')">Cancel</button>
+          <button type="submit" class="btn btn-primary">ENQUEUE BATCH</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Allocate Contiguous Exam File Modal -->
+  <div class="modal-overlay" id="modal-add-file">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title font-mono">Contiguous File Allocation</h3>
+        <button class="modal-close-btn" onclick="ExamOS.closeModal('modal-add-file')">✕</button>
+      </div>
+      <form onsubmit="FileManagerModule.handleCreateFile(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">File Name</label>
+            <input type="text" name="fileName" class="form-input" required placeholder="e.g. Python_Exam.txt" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department</label>
+            <select name="department" class="form-select">
+              <option value="Computer Engineering">Computer Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electronics Engineering">Electronics Engineering</option>
+              <option value="Applied Sciences">Applied Sciences</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Required Consecutive Disk Blocks (Size)</label>
+            <input type="number" name="fileSize" class="form-input" min="1" max="16" value="5" required />
+            <span class="form-helper">Contiguous algorithm requires adjacent free blocks. (1 Block = 4 KB).</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="ExamOS.closeModal('modal-add-file')">Cancel</button>
+          <button type="submit" class="btn btn-primary">ALLOCATE BLOCKS</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Process Control Block (PCB) Inspector Modal -->
+  <div class="modal-overlay" id="modal-pcb-inspector">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title font-mono">Process Control Block (PCB) Inspector</h3>
+        <button class="modal-close-btn" onclick="ExamOS.closeModal('modal-pcb-inspector')">✕</button>
+      </div>
+      <div class="modal-body" id="pcb-modal-content">
+        <!-- Injected by process-manager.js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="ExamOS.closeModal('modal-pcb-inspector')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Vanilla JavaScript Modules (Loaded in Order) -->
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/process-manager.js"></script>
+  <script src="js/scheduling.js"></script>
+  <script src="js/deadlock.js"></script>
+  <script src="js/memory.js"></script>
+  <script src="js/file-manager.js"></script>
+  <script src="js/directory.js"></script>
+
+  <!-- Initialization -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      ExamOS.init();
+    });
+  </script>
+</body>
+</html>
