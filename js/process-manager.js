@@ -201,6 +201,11 @@ const ProcessManagerModule = {
     const tbody = document.getElementById('threads-table-body');
     if (!tbody) return;
 
+    if (list.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 2rem; color:var(--text-muted);">No invigilator threads active. Click "+ SPAWN INVIGILATOR THREAD" above to create one.</td></tr>';
+      return;
+    }
+
     tbody.innerHTML = list
       .map(
         (t) => `

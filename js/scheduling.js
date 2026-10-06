@@ -52,23 +52,27 @@ const SchedulingModule = {
     // Render FCFS Batch Queue Table
     const queueTbody = document.getElementById('fcfs-queue-tbody');
     if (queueTbody) {
-      queueTbody.innerHTML = batchesQueue
-        .map(
-          (b, idx) => `
-        <tr>
-          <td><span class="font-mono" style="font-weight:700; color:var(--accent-cyan);">#${idx + 1}</span></td>
-          <td><strong class="font-mono">${b.batchId}</strong></td>
-          <td>${b.department}</td>
-          <td><span class="font-mono" style="font-weight:600;">${b.studentCount} candidates</span></td>
-          <td><span class="font-mono text-muted">${b.arrivalTime}</span></td>
-          <td><span class="badge badge-cyan">${b.assignedHall}</span></td>
-          <td>
-            <span class="badge badge-${b.allocationStatus === 'ALLOCATED' ? 'running' : 'waiting'}">${b.allocationStatus}</span>
-          </td>
-        </tr>
-      `
-        )
-        .join('');
+      if (batchesQueue.length === 0) {
+        queueTbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 2rem; color:var(--text-muted);">No examination batches in FCFS queue. Click "+ ENQUEUE BATCH" above to add one.</td></tr>';
+      } else {
+        queueTbody.innerHTML = batchesQueue
+          .map(
+            (b, idx) => `
+          <tr>
+            <td><span class="font-mono" style="font-weight:700; color:var(--accent-cyan);">#${idx + 1}</span></td>
+            <td><strong class="font-mono">${b.batchId}</strong></td>
+            <td>${b.department}</td>
+            <td><span class="font-mono" style="font-weight:600;">${b.studentCount} candidates</span></td>
+            <td><span class="font-mono text-muted">${b.arrivalTime}</span></td>
+            <td><span class="badge badge-cyan">${b.assignedHall}</span></td>
+            <td>
+              <span class="badge badge-${b.allocationStatus === 'ALLOCATED' ? 'running' : 'waiting'}">${b.allocationStatus}</span>
+            </td>
+          </tr>
+        `
+          )
+          .join('');
+      }
     }
   },
 
@@ -77,7 +81,7 @@ const SchedulingModule = {
     const unallocatedBatches = data.batches.filter((b) => b.allocationStatus !== 'ALLOCATED');
 
     if (unallocatedBatches.length === 0) {
-      ExamOS.showToast('All batches in the FCFS queue have already been allocated.', 'info');
+      ExamOS.showToast('No unallocated batches in the FCFS queue. Please enqueue a batch first.', 'info');
       return;
     }
 
@@ -151,43 +155,51 @@ const SchedulingModule = {
 
     const tbody = document.getElementById('priority-scheduling-tbody');
     if (tbody) {
-      tbody.innerHTML = invigilators
-        .map(
-          (inv, idx) => `
-        <tr>
-          <td><strong class="font-mono text-cyan" style="color:var(--accent-cyan);">#${idx + 1}</strong></td>
-          <td><strong class="font-mono">${inv.threadId}</strong></td>
-          <td><strong>${inv.name}</strong></td>
-          <td><span class="badge badge-amber font-mono" style="font-weight:700;">Priority ${inv.priority} ${inv.priority === 1 ? '(HIGHEST)' : ''}</span></td>
-          <td><span class="badge badge-cyan font-mono">${inv.assignedHall}</span></td>
-          <td><span class="badge badge-${inv.status.toLowerCase()}">${inv.status}</span></td>
-          <td><span style="font-size:0.8rem; color:var(--text-secondary);">${inv.department}</span></td>
-        </tr>
-      `
-        )
-        .join('');
+      if (invigilators.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 2rem; color:var(--text-muted);">No invigilators registered for priority dispatch. Spawn threads under Invigilator Threads tab.</td></tr>';
+      } else {
+        tbody.innerHTML = invigilators
+          .map(
+            (inv, idx) => `
+          <tr>
+            <td><strong class="font-mono text-cyan" style="color:var(--accent-cyan);">#${idx + 1}</strong></td>
+            <td><strong class="font-mono">${inv.threadId}</strong></td>
+            <td><strong>${inv.name}</strong></td>
+            <td><span class="badge badge-amber font-mono" style="font-weight:700;">Priority ${inv.priority} ${inv.priority === 1 ? '(HIGHEST)' : ''}</span></td>
+            <td><span class="badge badge-cyan font-mono">${inv.assignedHall}</span></td>
+            <td><span class="badge badge-${inv.status.toLowerCase()}">${inv.status}</span></td>
+            <td><span style="font-size:0.8rem; color:var(--text-secondary);">${inv.department}</span></td>
+          </tr>
+        `
+          )
+          .join('');
+      }
     }
 
     // Gantt / Timeline visualization
     const timelineContainer = document.getElementById('scheduling-timeline');
     if (timelineContainer) {
-      timelineContainer.innerHTML = invigilators
-        .slice(0, 5)
-        .map((inv, idx) => {
-          const width = 100 - idx * 15;
-          return `
-          <div style="margin-bottom:0.75rem;">
-            <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:0.25rem;">
-              <span><strong>${inv.name}</strong> (${inv.threadId}) - Priority ${inv.priority}</span>
-              <span class="font-mono text-muted">Hall ${inv.assignedHall}</span>
+      if (invigilators.length === 0) {
+        timelineContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem; padding:1.25rem; text-align:center;">No priority duties assigned yet.</div>';
+      } else {
+        timelineContainer.innerHTML = invigilators
+          .slice(0, 5)
+          .map((inv, idx) => {
+            const width = 100 - idx * 15;
+            return `
+            <div style="margin-bottom:0.75rem;">
+              <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:0.25rem;">
+                <span><strong>${inv.name}</strong> (${inv.threadId}) - Priority ${inv.priority}</span>
+                <span class="font-mono text-muted">Hall ${inv.assignedHall}</span>
+              </div>
+              <div style="height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden;">
+                <div style="width:${width}%; height:100%; background:linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo)); border-radius:6px;"></div>
+              </div>
             </div>
-            <div style="height:12px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden;">
-              <div style="width:${width}%; height:100%; background:linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo)); border-radius:6px;"></div>
-            </div>
-          </div>
-        `;
-        })
-        .join('');
+          `;
+          })
+          .join('');
+      }
     }
   },
 

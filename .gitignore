@@ -3,3 +3,5 @@ node_modules/
 backup_react_version/
 .DS_Store
 *.log
+
+.vercel

@@ -67,26 +67,30 @@ const FileManagerModule = {
     // 4. Render Files Table
     const tbody = document.getElementById('files-table-tbody');
     if (tbody) {
-      tbody.innerHTML = fs.files
-        .map((f) => {
-          const blockRange = `${f.startBlock} ➔ ${f.startBlock + f.length - 1} (${f.length} blocks)`;
-          return `
-          <tr>
-            <td><strong class="font-mono text-cyan" style="color:var(--accent-cyan);">${f.fileName}</strong></td>
-            <td>${f.department}</td>
-            <td><strong class="font-mono">${f.startBlock}</strong></td>
-            <td><span class="font-mono">${f.length * 4} KB (${f.length} blocks)</span></td>
-            <td><span class="badge badge-cyan font-mono">${blockRange}</span></td>
-            <td><span class="badge badge-safe">CONTIGUOUS</span></td>
-            <td>
-              <button class="btn btn-outline btn-sm text-rose" style="color:var(--accent-rose);" onclick="FileManagerModule.deleteFile('${f.fileName}')">
-                DEALLOCATE
-              </button>
-            </td>
-          </tr>
-        `;
-        })
-        .join('');
+      if (fs.files.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 2rem; color:var(--text-muted);">No files allocated on disk yet. Click "+ ALLOCATE NEW EXAM FILE" above to allocate contiguous blocks.</td></tr>';
+      } else {
+        tbody.innerHTML = fs.files
+          .map((f) => {
+            const blockRange = `${f.startBlock} ➔ ${f.startBlock + f.length - 1} (${f.length} blocks)`;
+            return `
+            <tr>
+              <td><strong class="font-mono text-cyan" style="color:var(--accent-cyan);">${f.fileName}</strong></td>
+              <td>${f.department}</td>
+              <td><strong class="font-mono">${f.startBlock}</strong></td>
+              <td><span class="font-mono">${f.length * 4} KB (${f.length} blocks)</span></td>
+              <td><span class="badge badge-cyan font-mono">${blockRange}</span></td>
+              <td><span class="badge badge-safe">CONTIGUOUS</span></td>
+              <td>
+                <button class="btn btn-outline btn-sm text-rose" style="color:var(--accent-rose);" onclick="FileManagerModule.deleteFile('${f.fileName}')">
+                  DEALLOCATE
+                </button>
+              </td>
+            </tr>
+          `;
+          })
+          .join('');
+      }
     }
   },
 

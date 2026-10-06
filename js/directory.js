@@ -16,10 +16,9 @@ const DirectoryModule = {
       this.bindTreeEvents();
     }
 
-    // Default select first file if none selected
+    // Default select root directory if none selected
     if (!this.selectedNode) {
-      const firstFile = treeRoot.children[0]?.children[0]?.children[0];
-      if (firstFile) this.selectNode(firstFile, '/College_Exam/Computer_Engineering/OS/Seating.txt');
+      this.selectNode(treeRoot, '/College_Exam');
     }
   },
 
